@@ -3,59 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>大會議程 | HEFC 2026</title>
+  <title>議程表 | HEFC 2026</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="site-main">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-logo" href="index.html">2026 HEFC</a>
+      <p class="site-tagline">2026 全國氫能與燃料電池研討會</p>
+      <p class="site-sub">國立臺灣科技大學 國際大樓（IB）｜2026/10/02（五）— 10/03（六）</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="主要導覽">
+    <div class="site-nav__inner">
+      <a href="index.html">首頁</a>
+      <a href="about.html">關於</a>
+      <a href="agenda.html" class="is-active">議程</a>
+      <a href="papers.html">徵稿</a>
+      <a href="submit.html">投稿</a>
+      <a href="registration.html">報名</a>
+      <a href="faq.html">常見問題</a>
+      <a href="venue.html">交通住宿</a>
+      <a href="exhibition.html">廠商展覽</a>
+      <a href="org.html">組織</a>
+    </div>
+  </nav>
+
+  <main class="site-main">
     <h1 class="page-title">大會議程</h1>
-    <p class="lead">本次活動分為 10/02 技術論壇與 10/03 研討會主場兩天進行，詳細時程如下。</p>
+    <p class="lead">本屆大會採取「論壇」與「研討會」雙線進行，以下為詳細時程規劃。</p>
 
     <div class="card">
       <div class="day-switch">
-        <button onclick="showDay(1)" id="btn-day1" class="day-btn is-active">Day 1｜10/02（五）</button>
-        <button onclick="showDay(2)" id="btn-day2" class="day-btn">Day 2｜10/03（六）</button>
+        <button onclick="showDay(1)" id="btn-day1" class="day-btn is-active">Day 1｜10/02 (五)</button>
+        <button onclick="showDay(2)" id="btn-day2" class="day-btn">Day 2｜10/03 (六)</button>
       </div>
 
+      <!-- DAY 1 -->
       <div id="day1">
-        <h2 class="agenda-day-title">技術論壇（10/02）</h2>
+        <h2 class="agenda-day-title">氫能與燃料電池技術論壇 (10/02)</h2>
         <div class="data-table-wrap">
           <table class="data-table">
             <thead>
               <tr><th>時間</th><th>內容</th><th>地點</th></tr>
             </thead>
             <tbody>
-              <tr><td class="time">09:00 - 09:30</td><td><span class="session-type type--break">報到</span> 來賓報到與資料領取</td><td>IB-101 大廳</td></tr>
-              <tr><td class="time">09:30 - 10:20</td><td><span class="session-type type--forum">論壇專題 I</span> 氫能基礎設施與市場發展</td><td>IB-101</td></tr>
-              <tr><td class="time">10:20 - 10:40</td><td><span class="session-type type--break">茶敘</span> Coffee Break</td><td>IB 2F</td></tr>
-              <tr><td class="time">10:40 - 12:00</td><td><span class="session-type type--forum">論壇專題 II</span> 燃料電池系統與產業趨勢</td><td>IB-101</td></tr>
-              <tr><td class="time">12:00 - 13:30</td><td><span class="session-type type--break">午餐</span> 交流午餐</td><td>校內餐敘空間</td></tr>
-              <tr><td class="time">13:30 - 15:00</td><td><span class="session-type type--forum">論壇專題 III</span> 產學對話：淨零轉型與氫能策略</td><td>IB-101</td></tr>
-              <tr><td class="time">15:00 - 15:20</td><td><span class="session-type type--break">茶敘</span> Coffee Break</td><td>IB 2F</td></tr>
-              <tr><td class="time">15:20 - 17:00</td><td><span class="session-type type--forum">論壇專題 IV</span> 產業應用與示範案例分享</td><td>IB-101</td></tr>
-              <tr><td class="time">18:00 - 20:00</td><td><span class="session-type type--break">晚宴</span> 技術論壇交流晚宴</td><td>另行公告</td></tr>
+              <tr><td class="time">09:00 - 09:30</td><td><span class="session-type type--break">☕ 報到</span> 與會者登錄／資料領取</td><td>IB-101 大廳</td></tr>
+              <tr><td class="time">09:30 - 10:20</td><td><span class="session-type type--forum">🎙️ 論壇專題 I</span> 氫能基礎設施與關鍵技術</td><td>IB-101</td></tr>
+              <tr><td class="time">10:20 - 10:40</td><td><span class="session-type type--break">☕ 茶敘</span> Coffee Break</td><td>IB 2F</td></tr>
+              <tr><td class="time">10:40 - 12:00</td><td><span class="session-type type--forum">🎙️ 論壇專題 II</span> 燃料電池與綠能應用趨勢</td><td>IB-101</td></tr>
+              <tr><td class="time">12:00 - 13:30</td><td><span class="session-type type--break">🍱 午餐</span> 會員交流午餐</td><td>各指定教室</td></tr>
+              <tr><td class="time">13:30 - 15:00</td><td><span class="session-type type--forum">🎙️ 論壇專題 III</span> 產學對談：氫能供應鏈挑戰</td><td>IB-101</td></tr>
+              <tr><td class="time">15:00 - 15:20</td><td><span class="session-type type--break">☕ 茶敘</span> Coffee Break</td><td>IB 2F</td></tr>
+              <tr><td class="time">15:20 - 17:00</td><td><span class="session-type type--forum">🎙️ 論壇專題 IV</span> 淨零排放路徑下的政策與產業展望</td><td>IB-101</td></tr>
+              <tr><td class="time">18:00 - 20:00</td><td><span class="session-type type--break">🏠 晚宴</span> 技術論壇廠商聯誼晚宴</td><td>新店彭園</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
+      <!-- DAY 2 -->
       <div id="day2" class="is-hidden">
-        <h2 class="agenda-day-title">研討會主場（10/03）</h2>
+        <h2 class="agenda-day-title">全國氫能與燃料電池研討會 (10/03)</h2>
         <div class="data-table-wrap">
           <table class="data-table">
             <thead>
               <tr><th>時間</th><th>內容</th><th>地點</th></tr>
             </thead>
             <tbody>
-              <tr><td class="time">09:00 - 09:30</td><td><span class="session-type type--break">開幕</span> 開幕式與來賓致詞</td><td>IB-101</td></tr>
-              <tr><td class="time">09:30 - 11:00</td><td><span class="session-type type--keynote">Keynote</span> 專題演講</td><td>IB-101</td></tr>
-              <tr><td class="time">11:00 - 12:00</td><td><span class="session-type type--sympo">口頭發表</span> 學生競賽與口頭論文發表</td><td>IB 分組會場</td></tr>
-              <tr><td class="time">12:00 - 13:30</td><td><span class="session-type type--break">午餐</span> 論文交流餐敘</td><td>IB 交流空間</td></tr>
-              <tr><td class="time">13:30 - 15:00</td><td><span class="session-type type--sympo">海報發表</span> 海報論文展示與評審</td><td>IB 2F 走廊</td></tr>
-              <tr><td class="time">15:00 - 15:20</td><td><span class="session-type type--break">茶敘</span> Coffee Break</td><td>IB 2F</td></tr>
-              <tr><td class="time">15:20 - 17:00</td><td><span class="session-type type--sympo">綜合論壇</span> 氫能與燃料電池研究成果交流</td><td>IB 分組會場</td></tr>
-              <tr><td class="time">17:00 - 17:30</td><td><span class="session-type type--break">閉幕</span> 頒獎與閉幕致詞</td><td>IB-101</td></tr>
-              <tr><td class="time">18:00 - 20:30</td><td><span class="session-type type--break">晚宴</span> HEFC Banquet</td><td>另行公告</td></tr>
+              <tr><td class="time">09:00 - 09:30</td><td><span class="session-type type--break">🏅 開幕</span> 2026 HEFC 開幕典禮與致詞</td><td>IB-101</td></tr>
+              <tr><td class="time">09:30 - 11:00</td><td><span class="session-type type--keynote">🌟 Keynote</span> 國際大會特邀專題演講</td><td>IB-101</td></tr>
+              <tr><td class="time">11:00 - 12:00</td><td><span class="session-type type--sympo">📊 分組</span> 學生論文競賽與學術口頭報告</td><td>IB 各分會場</td></tr>
+              <tr><td class="time">12:00 - 13:30</td><td><span class="session-type type--break">🍱 午餐</span> 論文交流午宴</td><td>IB 各分會場</td></tr>
+              <tr><td class="time">13:30 - 15:00</td><td><span class="session-type type--sympo">🖼️ 海報</span> 海報論文發表與現場評選</td><td>IB 2F 走廊</td></tr>
+              <tr><td class="time">15:00 - 15:20</td><td><span class="session-type type--break">☕ 茶敘</span> Coffee Break</td><td>IB 2F</td></tr>
+              <tr><td class="time">15:20 - 17:00</td><td><span class="session-type type--sympo">📊 分組</span> 全國氫能與燃料電池學術發表</td><td>IB 各分會場</td></tr>
+              <tr><td class="time">17:00 - 17:30</td><td><span class="session-type type--break">🏅 閉幕</span> 優秀論文頒獎與閉幕</td><td>IB-101</td></tr>
+              <tr><td class="time">18:00 - 20:30</td><td><span class="session-type type--break">🎉 晚宴</span> 大會晚宴 (HEFC Banquet)</td><td>曉鹿鳴樓</td></tr>
             </tbody>
           </table>
         </div>
@@ -78,8 +102,8 @@
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p><strong>2026 台灣氫能與燃料電池研討會（2026 HEFC）</strong></p>
-      <p>主辦：國立臺灣科技大學 材料科學與工程系 氫能與燃料電池實驗室</p>
+      <p><strong>2026 全國氫能與燃料電池研討會（2026 HEFC）</strong></p>
+      <p>主辦：國立臺灣科技大學 材料科學與工程系 能源材料實驗室 (王丞浩 教授)</p>
     </div>
   </footer>
 </body>

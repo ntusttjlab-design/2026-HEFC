@@ -5,20 +5,19 @@
 
   function parseError(res, bodyText) {
     try {
-      var json = JSON.parse(bodyText);
-      if (json.detail) {
-        if (Array.isArray(json.detail)) {
-          return json.detail
-            .map(function (item) {
-              return item.msg || JSON.stringify(item);
+      var j = JSON.parse(bodyText);
+      if (j.detail) {
+        if (Array.isArray(j.detail)) {
+          return j.detail
+            .map(function (d) {
+              return d.msg || JSON.stringify(d);
             })
-            .join(" / ");
+            .join("；");
         }
-        if (typeof json.detail === "string") return json.detail;
+        if (typeof j.detail === "string") return j.detail;
       }
     } catch (e) {}
-
-    return bodyText || res.statusText || "請稍後再試。";
+    return bodyText || res.statusText || "請稍後再試";
   }
 
   function showMsg(el, type, text) {
@@ -46,27 +45,33 @@
         participant_type: form.participant_type.value,
         dietary: form.dietary.value.trim(),
         invoice_need: form.invoice_need.value.trim(),
-        remarks: form.remarks.value.trim()
+        remarks: form.remarks.value.trim(),
       };
 
       fetch(API + "/api/registrations", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       })
         .then(function (res) {
-          return res.text().then(function (text) {
-            return { res: res, text: text };
+          return res.text().then(function (t) {
+            return { res: res, t: t };
           });
         })
-        .then(function (payload) {
-          if (!payload.res.ok) throw new Error(parseError(payload.res, payload.text));
-          var json = JSON.parse(payload.text);
-          showMsg(msg, "ok", json.message + "，報名編號 #" + json.id);
+        .then(function (_ref) {
+          var res = _ref.res;
+          var t = _ref.t;
+          if (!res.ok) throw new Error(parseError(res, t));
+          var j = JSON.parse(t);
+          showMsg(
+            msg,
+            "ok",
+            j.message + "（編號 #" + j.id + "）"
+          );
           form.reset();
         })
         .catch(function (err) {
-          showMsg(msg, "err", err.message || "送出失敗。");
+          showMsg(msg, "err", err.message || "送出失敗");
         });
     });
   }
@@ -85,21 +90,29 @@
 
       fetch(API + "/api/submissions", {
         method: "POST",
-        body: fd
+        body: fd,
       })
         .then(function (res) {
-          return res.text().then(function (text) {
-            return { res: res, text: text };
+          return res.text().then(function (t) {
+            return { res: res, t: t };
           });
         })
-        .then(function (payload) {
-          if (!payload.res.ok) throw new Error(parseError(payload.res, payload.text));
-          var json = JSON.parse(payload.text);
-          showMsg(msg, "ok", json.message + "，查詢代碼：" + json.receipt_token);
+        .then(function (_ref) {
+          var res = _ref.res;
+          var t = _ref.t;
+          if (!res.ok) throw new Error(parseError(res, t));
+          var j = JSON.parse(t);
+          showMsg(
+            msg,
+            "ok",
+            j.message +
+              " 查詢代碼：" +
+              j.receipt_token
+          );
           form.reset();
         })
         .catch(function (err) {
-          showMsg(msg, "err", err.message || "送出失敗。");
+          showMsg(msg, "err", err.message || "送出失敗");
         });
     });
   }

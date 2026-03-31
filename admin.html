@@ -8,9 +8,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="site-main">
-    <h1 class="page-title">報名與投稿管理後台</h1>
-    <p class="lead">請輸入環境變數 <code>HEFC_ADMIN_TOKEN</code> 對應的管理金鑰，即可載入報名與投稿資料。</p>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-logo" href="index.html">2026 HEFC</a>
+      <p class="site-tagline">管理後台（僅工作人員）</p>
+    </div>
+  </header>
+  <nav class="site-nav" aria-label="主要導覽">
+    <div class="site-nav__inner">
+      <a href="index.html">首頁</a>
+      <a href="submit.html">投稿</a>
+      <a href="registration.html">報名</a>
+    </div>
+  </nav>
+
+  <main class="site-main">
+    <h1 class="page-title">報名與投稿總覽</h1>
+    <p class="lead">請輸入環境變數 <code>HEFC_ADMIN_TOKEN</code> 所設定的管理金鑰。資料僅存於伺服器本機資料庫，請勿將金鑰外洩。</p>
 
     <article class="card">
       <h2>登入</h2>
@@ -26,7 +40,7 @@
 
     <article class="card">
       <h2>統計</h2>
-      <p id="summary">尚未載入資料</p>
+      <p id="summary">尚未載入</p>
     </article>
 
     <article class="card">
@@ -39,9 +53,9 @@
               <th>時間</th>
               <th>姓名</th>
               <th>Email</th>
-              <th>身份</th>
+              <th>類別</th>
               <th>單位</th>
-              <th>備註</th>
+              <th>飲食／收據／備註</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -60,9 +74,9 @@
               <th>題目</th>
               <th>作者</th>
               <th>Email</th>
-              <th>發表形式</th>
+              <th>形式</th>
               <th>摘要</th>
-              <th>檔名</th>
+              <th>檔案</th>
               <th>查詢碼</th>
             </tr>
           </thead>
@@ -84,100 +98,114 @@
   var msg = document.getElementById("admin-msg");
   var summary = document.getElementById("summary");
 
-  function showErr(text) {
-    msg.textContent = text;
+  function showErr(t) {
+    msg.textContent = t;
     msg.className = "form-msg is-visible form-msg--err";
   }
-
-  function showOk(text) {
-    msg.textContent = text;
+  function showOk(t) {
+    msg.textContent = t;
     msg.className = "form-msg is-visible form-msg--ok";
   }
 
   btn.addEventListener("click", function () {
     var token = tok.value.trim();
     if (!token) {
-      showErr("請輸入管理金鑰。");
+      showErr("請輸入管理金鑰");
       return;
     }
-
     msg.className = "form-msg";
     msg.textContent = "";
 
     fetch("/api/admin/summary", {
-      headers: { "X-Admin-Token": token }
+      headers: { "X-Admin-Token": token },
     })
-      .then(function (response) {
-        if (!response.ok) throw new Error("管理金鑰錯誤或沒有權限。");
-        return response.json();
+      .then(function (r) {
+        if (!r.ok) throw new Error("金鑰錯誤或無權限");
+        return r.json();
       })
-      .then(function (stats) {
+      .then(function (s) {
         summary.textContent =
-          "報名 " + stats.registrations + " 筆，投稿 " + stats.submissions + " 筆";
-
+          "報名 " + s.registrations + " 筆；投稿 " + s.submissions + " 筆";
         return Promise.all([
           fetch("/api/admin/registrations", {
-            headers: { "X-Admin-Token": token }
-          }).then(function (response) {
-            return response.json();
+            headers: { "X-Admin-Token": token },
+          }).then(function (r) {
+            return r.json();
           }),
           fetch("/api/admin/submissions", {
-            headers: { "X-Admin-Token": token }
-          }).then(function (response) {
-            return response.json();
-          })
+            headers: { "X-Admin-Token": token },
+          }).then(function (r) {
+            return r.json();
+          }),
         ]);
       })
       .then(function (pair) {
-        var regs = pair[0].items || [];
-        var subs = pair[1].items || [];
+        var regs = pair[0].items;
+        var subs = pair[1].items;
         var tbR = document.querySelector("#tbl-reg tbody");
         var tbS = document.querySelector("#tbl-sub tbody");
         tbR.innerHTML = "";
         tbS.innerHTML = "";
-
         regs.forEach(function (row) {
           var tr = document.createElement("tr");
           tr.innerHTML =
-            "<td>" + row.id + "</td>" +
-            "<td>" + esc(row.created_at) + "</td>" +
-            "<td>" + esc(row.name_zh) + "</td>" +
-            "<td>" + esc(row.email) + "</td>" +
-            "<td>" + esc(row.participant_type) + "</td>" +
-            "<td>" + esc(row.organization || "") + "</td>" +
-            "<td><pre>" +
-            esc([row.dietary, row.invoice_need, row.remarks].filter(Boolean).join("\n")) +
+            "<td>" +
+            row.id +
+            "</td><td>" +
+            row.created_at +
+            "</td><td>" +
+            esc(row.name_zh) +
+            "</td><td>" +
+            esc(row.email) +
+            "</td><td>" +
+            esc(row.participant_type) +
+            "</td><td>" +
+            esc(row.organization || "") +
+            "</td><td><pre>" +
+            esc(
+              [row.dietary, row.invoice_need, row.remarks]
+                .filter(Boolean)
+                .join("\n")
+            ) +
             "</pre></td>";
           tbR.appendChild(tr);
         });
-
         subs.forEach(function (row) {
           var tr = document.createElement("tr");
           tr.innerHTML =
-            "<td>" + row.id + "</td>" +
-            "<td>" + esc(row.created_at) + "</td>" +
-            "<td>" + esc(row.title) + "</td>" +
-            "<td>" + esc(row.authors) + "</td>" +
-            "<td>" + esc(row.email) + "</td>" +
-            "<td>" + esc(row.presentation_type) + "</td>" +
-            "<td><pre>" + esc(row.abstract_text) + "</pre></td>" +
-            "<td>" + esc(row.file_name || "") + "</td>" +
-            "<td><code>" + esc(row.receipt_token) + "</code></td>";
+            "<td>" +
+            row.id +
+            "</td><td>" +
+            row.created_at +
+            "</td><td>" +
+            esc(row.title) +
+            "</td><td>" +
+            esc(row.authors) +
+            "</td><td>" +
+            esc(row.email) +
+            "</td><td>" +
+            esc(row.presentation_type) +
+            "</td><td><pre>" +
+            esc(row.abstract_text) +
+            "</pre></td><td>" +
+            esc(row.file_name || "—") +
+            "</td><td><code>" +
+            esc(row.receipt_token) +
+            "</code></td>";
           tbS.appendChild(tr);
         });
-
-        showOk("資料已載入。");
+        showOk("已載入");
       })
-      .catch(function (error) {
-        showErr(error.message || String(error));
+      .catch(function (e) {
+        showErr(e.message || String(e));
       });
   });
 
-  function esc(value) {
-    if (value == null) return "";
-    var div = document.createElement("div");
-    div.textContent = value;
-    return div.innerHTML;
+  function esc(s) {
+    if (s == null) return "";
+    var d = document.createElement("div");
+    d.textContent = s;
+    return d.innerHTML;
   }
 })();
   </script>

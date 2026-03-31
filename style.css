@@ -1,8 +1,8 @@
 :root {
-  --primary: #002244;    /* �`�I����� */
-  --secondary: #00b4d8;  /* ��b�B��C (��ı�J�I) */
-  --accent: #ffb703;     /* �෽��q�� */
-  --bg-light: #f8fbfe;   /* ���P�M�s���ŭI�� */
+  --primary: #002244;    /* 深沉科技藍 */
+  --secondary: #00b4d8;  /* 潔淨氫能青 (視覺焦點) */
+  --accent: #ffb703;     /* 能源能量金 */
+  --bg-light: #f8fbfe;   /* 極致清新白藍背景 */
   --white: #ffffff;
   --text: #2b2d42;
   --shadow: 0 4px 15px rgba(0, 50, 100, 0.1);
@@ -18,7 +18,7 @@ body {
   padding: 0;
 }
 
-/* ������������ - �[�J�L�Ӫ��B���l���P */
+/* 全站頁首美化 - 加入微細的氫分子網格感 */
 .site-header {
   background: linear-gradient(160deg, var(--primary) 0%, #004e92 100%);
   color: var(--white);
@@ -52,7 +52,7 @@ body {
   opacity: 0.9;
 }
 
-/* �����C */
+/* 導覽列 */
 .site-nav {
   background: var(--white);
   border-bottom: 2px solid var(--secondary);
@@ -72,7 +72,7 @@ body {
   background: rgba(0, 180, 216, 0.08);
 }
 
-/* �j�ƥd����P */
+/* 強化卡片質感 */
 .card {
   background: var(--white);
   padding: 35px;
@@ -89,7 +89,7 @@ body {
   padding-left: 20px;
 }
 
-/* ���s���� */
+/* 按鈕美化 */
 .btn--primary {
   background: var(--secondary);
   color: var(--white);
@@ -101,7 +101,7 @@ body {
 }
 
 
-/* ������ */
+/* 表格美化 */
 .data-table-wrap {
   overflow-x: auto;
   border-radius: var(--radius);
@@ -127,7 +127,7 @@ body {
   background: #fdfdfd;
 }
 
-/* �������� */
+/* 頁尾美化 */
 .site-footer {
   background: #222;
   color: #bbb;
@@ -140,7 +140,7 @@ body {
   font-size: 1.2rem;
 }
 
-/* ĳ�{���Ҽ˦� */
+/* 議程標籤樣式 */
 .session-type {
   display: inline-block;
   padding: 4px 10px;
@@ -154,7 +154,7 @@ body {
 .type--break { background: #f5f5f5; color: #757575; border: 1px solid #e0e0e0; }
 .type--keynote { background: #ede7f6; color: #5e35b1; border: 1px solid #d1c4e9; }
 
-/* �٧U�Ӱ϶� */
+/* 贊助商區塊 */
 .sponsor-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -180,21 +180,21 @@ body {
   transform: scale(1.05);
 }
 
-/* �T�����G���ɱj (RWD) */
+/* 響應式佈局補強 (RWD) */
 @media (max-width: 768px) {
   .site-nav__inner { gap: 0; }
   .site-nav a { padding: 10px 12px; font-size: 0.85rem; }
   .site-logo { font-size: 1.8rem; }
   .site-tagline { font-size: 1.1rem; }
   .card { padding: 20px; }
-  /* �j���� grid �e���b������אּ���� */
+  /* 強制讓 grid 容器在手機版改為單欄 */
   [style*="display: grid"] {
     grid-template-columns: 1fr !important;
     gap: 15px !important;
   }
 }
 
-/* ���˦� */
+/* 表單樣式 */
 .form-stack .form-row {
   margin-bottom: 20px;
 }
@@ -224,7 +224,7 @@ body {
 }
 
 
-/* ---- �ɻ�@�Ϊ����]�s�������@�P�ơ^ ---- */
+/* ---- 補齊共用版型（新版頁面一致化） ---- */
 .site-header__inner,
 .site-main,
 .site-footer__inner {
@@ -351,7 +351,7 @@ body {
 }
 
 
-/* ---- inline-style �����G�@�� utility/component classes ---- */
+/* ---- inline-style 抽離：共用 utility/component classes ---- */
 .u-center { text-align: center; }
 .u-mt-10 { margin-top: 10px; }
 .u-mt-15 { margin-top: 15px; }
